@@ -1,0 +1,61 @@
+
+body,html
+{
+	height:100%;
+}
+
+header, footer {
+	font-family: "Seaweed Script";
+    padding: 1em;
+    color: #fff;
+    font-size: 30px;
+    background-color: black;
+    clear: left;
+    text-align: center;
+    position: relative;
+
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+    
+div.container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    display: flex;
+	/* flex-direction: row; */
+}
+
+#sidebar 
+{
+	font-family: "Seaweed Script";
+	font-size: 30px;
+	color: black;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    height: 100%;
+    /* float: left; //wenn flex drin ist */
+
+}
+
+#video-content {
+
+	width: 75%;
+   
+    border-left: 1px solid gray;
+    padding: 1em;
+  
+}
