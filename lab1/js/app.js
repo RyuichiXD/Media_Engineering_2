@@ -1,13 +1,3 @@
- 
-
- function videoInit() {
-
- 
-  //          alert('ok');
-        }
- 
-
- window.onload = videoInit;
 
 
 window.addEventListener("load", function(event) {
