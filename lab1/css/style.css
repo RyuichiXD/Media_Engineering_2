@@ -1,66 +1,143 @@
+/**global**/
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+* {
+    margin:0;
+    padding:0;
+}
+html, body {
+    min-height: 100%;
+    height: 100%;
+    font-family: "Source Sans Pro","sans-serif";
+    font-size: 1.0em;
+    color:#666;
 
-body,html
-{
-	height:100%;
+}
+h1 {
+    font-size:2.4em;
+    font-weight: bolder;
+}
+h2 {
+    color:#000;
+    font-size:1.8em;
+    font-weight:bold;
+}
+h3 {
+    font-size:1em;
+    color: lightgray;
+}
+video {
+    max-width: 100%;
 }
 
-header, footer {
-	font-family: "Seaweed Script";
-    padding: 1em;
-    color: #fff;
-    font-size: 30px;
-    background-color: black;
-    clear: left;
+button {
+    background-color: lightgrey;
+    border: none;
+    color: inherit;
+    padding: 15px 32px;
+    font-size: 16px;
+    float: left;
+    width:32%;
+}
+.controlbtn > *:nth-child(2){
+    margin: 0 2%;
+}
+
+
+/**particials**/
+footer {
+    height: 50px;
+    background: #262626;
     text-align: center;
+    line-height: 50px;
+}
+header {
+    padding:10px;
+}
+header h1{
+    color:#fff;
+    letter-spacing:-2px;
+}
+header h2 {
+    color: #1abc9c;
+    font-size: 1em;
+}
+article h2 {
+    font-size: 1em;
+}
+
+/**page elements**/
+#wrapper {
+    min-height: 100%;
+    margin: 0 auto -50px;
     position: relative;
-
+}
+#container {
+    height: 100%;
+}
+.content {
+    margin-left: 180px;
+    padding: 15px;
+    background: #fff;
+    display: flex; /**responsiveness**/
+    flex-wrap: wrap; /**responsiveness**/
+}
+.content > * {
+    flex: 1 0 20em; /**responsiveness**/
+    margin: 0.5em; /**responsiveness**/
+}
+.content > *:first-child {
+    flex-basis: calc(100% - 1em); /**responsiveness**/
 }
 
-li {
 
-	list-style-type: none;
+/**sidebar**/
+#sidebar {
+    width: 180px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background:#16a085;
+    text-align: right;
+    z-index: -1;
 }
-
 nav ul {
-    list-style-type: none;
-    padding: 5px;
-    margin-left: 5px;
+    list-style: none;
+    margin-top: 10px;
 }
 
-nav a {
+nav li {
+    border-bottom: 1px solid darkgray;
+    border-top: 1px solid darkgrey;
+}
+nav li a {
+    display: block;
+    padding: 15px 17px;
     text-decoration: none;
-    margin-left: 5px;
+    color:#fff;
+}
+nav li a:hover {
+    background:#fff;
+    color:#000;
 }
 
-    
-div.container {
-    width: 100%;
-    height: 100%;
-    border: 1px solid gray;
-    display: flex;
-	/* flex-direction: row; */
+
+/**helper**/
+.push {
+    height: 50px;
+    clear: both;
 }
 
-#sidebar 
-{
-	font-family: "Seaweed Script";
-	font-size: 30px;
-	color: black;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 25%;
-    background-color: #f1f1f1;
-    height: 100%;
-    /* float: left; //wenn flex drin ist */
-
-}
-
-#video-content {
-
-	width: 75%;
-   
-    border-left: 1px solid gray;
-    padding: 1em;
-  
+/*breakpoints*/
+@media only screen and (max-width: 600px) {
+    #sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        background:#16a085;
+        text-align: center;
+    }
+    .content {
+        margin-left: 0;
+    }
 }
