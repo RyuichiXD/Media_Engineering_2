@@ -1,6 +1,7 @@
 
 
 window.addEventListener("load", function(event) {
+	
 	var videos = document.getElementsByTagName("video");
 	var btnsPlay = document.getElementsByClassName("btnPlay");
 	var btnsPause = document.getElementsByClassName("btnPause");
@@ -38,5 +39,5 @@ function stopListner(index) {
 		// 	videos[i].play();
 
 		// }); 
-	    //}
+	 //    }
 });
