@@ -13,9 +13,9 @@ const app = express();
 // });
 
 
-// app.all('*' , function (req, res) {
-//     res.send('Hello world\n');
-// });
+app.all('*' , function (req, res) {
+    res.send('Hello world\n');
+});
 
 // Server starten
 app.listen(PORT);
