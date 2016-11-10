@@ -14,8 +14,14 @@ const app = express();
 
 
 app.all('*' , function (req, res) {
+    res.type('text/plain');
     res.send('Hello world\n');
 });
+
+/*
+app.use('*' , function (req, res) {
+    res.send('Hello world\n');
+});*/
 
 // Server starten
 app.listen(PORT);
