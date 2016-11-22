@@ -12,6 +12,10 @@ const app = express();
 app.use('/public', express.static('static'));
 
 //U1
+app.all('*' , function (req, res) {
+    res.type('text/plain');
+    res.send('Hello world\n');
+});
 
 // // app.use würde auch wenn statt * /go stehen würde alles auch nach /go/bla nehmen
 // app.use('*' , function (req, res) {
@@ -47,13 +51,6 @@ app.get('/file.txt', function (req, res) {
     });
 
 });
-
-
-app.all('*' , function (req, res) {
-    res.type('text/plain');
-    res.send('Hello world\n');
-});
-
 
 // Server starten
 app.listen(PORT);
