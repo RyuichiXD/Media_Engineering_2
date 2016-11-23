@@ -66,6 +66,7 @@ app.use(function (req, res, next) {
 // Routes ***************************************
 
 app.get('/tweets', function (req, res, next) {
+    console.log("tweets called");
     var list = store.select('tweets');
     var url = req.protocol + '://' + req.get('host') + req.originalUrl;
     var tweets = [];
@@ -92,8 +93,8 @@ app.post('/tweets', function (req, res, next) {
 });
 
 app.param('tid', function (req, res, next, id) {
-    var allUsers = store.select('tweets');
-    var listOfIds = allUsers.map(function (v) {return v.id;});
+    var allTweets = store.select('tweets');
+    var listOfIds = allTweets.map(function (v) {return v.id;});
     if (listOfIds.includes(Number(id)) === false) {
         return res.status(404).send("Invalid ID");
     }
@@ -103,17 +104,17 @@ app.param('tid', function (req, res, next, id) {
 app.get('/tweets/:tid', function (req, res, next) {
     res.json({
         href: req.protocol + '://' + req.get('host') + req.originalUrl,
-        items: store.select('tweets', req.params.id)
+        items: store.select('tweets', req.params.tid)
     })
 });
 
 app.delete('/tweets/:tid', function (req, res, next) {
-    store.remove('tweets', req.params.id);
+    store.remove('tweets', req.params.tid);
     res.status(200).end();
 });
 
 app.put('/tweets/:tid', function (req, res, next) {
-    store.replace('tweets', req.params.id, req.body);
+    store.replace('tweets', req.params.tid, req.body);
     res.status(200).end();
 });
 
@@ -137,7 +138,7 @@ app.route('/users')
                     lastname: allUsers[k].lastname,
                     'tweets': {
                         //href: allTweetsFromUser
-                        href: url + '/' + allUsers[k].id + '?expand=' + 'tweets'
+                        href: url + '/' + allUsers[k].id
                     }
                 });
             }
@@ -167,7 +168,7 @@ app.param('uid', function (req, res, next, id) {
 app.route('/users/:uid')
     .get(function (req, res) {
         var url = req.protocol + '://' + req.get('host') + req.originalUrl;
-        var user = store.select('users', req.params.id);
+        var user = store.select('users', req.params.uid);
         var urlTweets = [];
         var allTweets = store.select('tweets');
         if (user !== undefined) {
@@ -194,11 +195,11 @@ app.route('/users/:uid')
         })
     })
     .delete(function (req, res) {
-        store.remove('users', req.params.id);
+        store.remove('users', req.params.uid);
         res.status(200).end();
     })
     .put(function (req, res) {
-        store.replace('users', req.params.id, req.body);
+        store.replace('users', req.params.uid, req.body);
         res.status(200).end();
     });
 
