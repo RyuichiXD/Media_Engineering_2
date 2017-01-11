@@ -98,8 +98,32 @@ videos.route('/:id')
     .get(function(req, res,next) {
         // TODO replace store and use mongoose/MongoDB
         // res.locals.items = store.select('videos', req.params.id);
+        //--------------START NEW CODE --------------------------
+        Video.find({_id: req.params.id},function (err,videoContent) {
+            console.log(req.params.id)
+            if (err)
+            {
+                console.log("Fehler beim finden der Videos "+ err);
+                res.status(500).send("Serverfehler!");
+            }
+
+            if(!videoContent.length)
+            {
+                console.log("Videos nicht gefunden");
+                res.status(404).send("Videos nicht gefunden!");
+            }
+            else
+            {
+                console.log("Video gefunden");
+                //res.sendStatus(200);
+                res.status(200).json(videoContent);
+            }
+        });
+        //--------------END NEW CODE --------------------------
+
+
         res.locals.processed = true;
-        next();
+       // next();
     })
     .put(function(req, res,next) {
         var id = parseInt(req.params.id);
@@ -128,10 +152,29 @@ videos.route('/:id')
         //    err.status = codes.notfound;
         //    next(err);
         // ...
+
+        Video.remove({_id: req.params.id},function (err) {
+            console.log(req.params.id)
+            if (err)
+            {
+                //console.log("Fehler beim finden des zu löschenden Videos "+ err);
+                //res.status(500).send("Serverfehler!");
+
+                err = new Error('{"error": { "message": "Fehler beim finden des zu löschenden Videos", "code": 500 } }');
+                err.status = 500;
+                next(err);
+
+            }
+            else {
+                console.log("Video gelöscht");
+                res.status(200).send("Video gelöscht!");
+            }
+        });
+        //--------------END NEW CODE --------------------------
+
+
         res.locals.processed = true;
-        next();
-
-
+        //next();
     })
     .patch(function(req,res,next) {
         // TODO replace these lines by correct code with mongoose/mongoDB
