@@ -31,8 +31,9 @@ videos.route('/')
         Video.find({ },function (err,videosCollection) {
             if (err)
             {
-                console.log("Fehler beim finden der Videos "+ err);
-                res.status(500).send("Serverfehler!");
+                err = new Error('{"error": { "message": "Fehler beim finden der Videos", "code": 500 } }');
+                err.status = 500;
+                next(err);
             }
 
             if(!videosCollection.length)
@@ -64,10 +65,8 @@ videos.route('/')
         mongoDB_video.save(function(err) {
             if (err) {
                 console.log(err);
-                //res.status(400).send("Fehler beim speichern!");
-
-                err = new Error('{"error": { "message": "Error while saving in database", "code": 400 } }');
-                err.status = 400;
+                err = new Error('{"error": { "message": "Error while saving in database", "code": 500 } }');
+                err.status = 500;
                 next(err);
             }
             else
@@ -103,8 +102,9 @@ videos.route('/:id')
             console.log(req.params.id)
             if (err)
             {
-                console.log("Fehler beim finden der Videos "+ err);
-                res.status(500).send("Serverfehler!");
+                err = new Error('{"error": { "message": "Fehler beim finden der Videos", "code": 500 } }');
+                err.status = 500;
+                next(err);
             }
 
             if(!videoContent.length)
@@ -130,19 +130,21 @@ videos.route('/:id')
         if (id === req.body.id) {
             // TODO replace store and use mongoose/MongoDB
             // store.replace(storeKey, req.body.id, req.body);
-            res.status(200);
-            res.locals.items = store.select(storeKey, id);
-            res.locals.processed = true;
-            next();
+            //--------------START NEW CODE --------------------------
+
+            //--------------END NEW CODE --------------------------
         }
         else {
             var err = new Error('id of PUT resource and send JSON body are not equal ' + req.params.id + " " + req.body.id);
             err.status = codes.wrongrequest;
             next(err);
         }
+
+
+
+
     })
     .delete(function(req,res,next) {
-        var id = parseInt(req.params.id);
 
         // TODO replace store and use mongoose/MongoDB
         // store.remove(storeKey, id);
@@ -178,9 +180,30 @@ videos.route('/:id')
     })
     .patch(function(req,res,next) {
         // TODO replace these lines by correct code with mongoose/mongoDB
-        var err = new Error('Unimplemented method!');
-        err.status = 500;
-        next(err);
+
+        //--------------START NEW CODE -------------------------
+        console.log(req.body)
+        if( req.body['__v'] || req.body['_id'] )
+        {
+            res.status(300).send("kein setzen der Felder _id und __v erlaubt!");
+        }
+        else
+        {
+            Video.findByIdAndUpdate( req.params.id , req.body, {new: true},function (err,videoContent) {
+                console.log(req.params.id)
+                if (err)
+                {
+                    err = new Error('{"error": { "message": "Fehler beim updaten des Videos", "code": 500 } }');
+                    err.status = 500;
+                    next(err);
+                }
+                else
+                {
+                    res.status(200).json(videoContent);
+                }
+            });
+        }
+        //--------------END NEW CODE --------------------------
     })
 
     .all(function(req, res, next) {
