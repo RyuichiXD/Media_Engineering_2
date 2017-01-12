@@ -126,12 +126,41 @@ videos.route('/:id')
        // next();
     })
     .put(function(req, res,next) {
-        var id = parseInt(req.params.id);
-        if (id === req.body.id) {
+
+        if (req.params.id === req.body._id) {
             // TODO replace store and use mongoose/MongoDB
             // store.replace(storeKey, req.body.id, req.body);
             //--------------START NEW CODE --------------------------
 
+            // setze alles auf default
+            var mongoDB_video = new Video();
+
+            //fülle mongoDB_video mit req.body
+            for(var key in req.body) {
+                if(req.body.hasOwnProperty(key)){
+                    mongoDB_video[key] = req.body[key];
+                }
+            }
+
+            //entferne wichtige _id und __v
+            mongoDB_video._id = undefined;
+            mongoDB_video.__v = undefined;
+
+            //nehme das layout von mongoDB_video und update alle Felder ausser _id und __v
+            Video.findByIdAndUpdate( req.params.id ,mongoDB_video, {new: true},function (err,videoContent) {
+                console.log(req.params.id)
+                if (err)
+                {
+                    err = new Error('{"error": { "message": "Fehler beim updaten des Videos", "code": 500 } }');
+                    err.status = 500;
+                    next(err);
+                }
+                else
+                {
+                    console.log(mongoDB_video)
+                    res.status(200).json(videoContent);
+                }
+            });
             //--------------END NEW CODE --------------------------
         }
         else {
@@ -139,10 +168,6 @@ videos.route('/:id')
             err.status = codes.wrongrequest;
             next(err);
         }
-
-
-
-
     })
     .delete(function(req,res,next) {
 
@@ -185,7 +210,7 @@ videos.route('/:id')
         console.log(req.body)
         if( req.body['__v'] || req.body['_id'] )
         {
-            res.status(300).send("kein setzen der Felder _id und __v erlaubt!");
+            res.status(400).send("kein setzen der Felder _id und __v erlaubt!");
         }
         else
         {

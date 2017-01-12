@@ -10,7 +10,7 @@ var VideoSchema = new mongoose.Schema({
     description: {type: String, default: ""}, // (String, optional, default '' [leerer String])
     src: {type: String, required: true}, // (String, required)
     length: {type: Number,  min:0, required: true}, //(Number; nicht negative Zahl für Sekundenangabe, required)
-    timestamp: {createdAt: 'timestamp', type: String, default: Date.now }, // (String, nicht von Außen setzbar, automatisch bei POST)
+    timestamp: {createdAt: 'timestamp', type: String }, // (String, nicht von Außen setzbar, automatisch bei POST)
     playcount: {type: Number, min:0, default: 0}, //(Number; nicht negative Zahl, optional, default 0)
     ranking: {type: Number, min:0, default: 0} //(Number; nicht negative Zahl, optional, default 0)
 });
