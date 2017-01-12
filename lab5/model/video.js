@@ -1,5 +1,5 @@
 /**
- * Created by Samy on 08.01.2017.
+ * Created by Samed Sulanc, Wadim Lewin, Clemens Buckert
  */
 var mongoose = require('mongoose');
 

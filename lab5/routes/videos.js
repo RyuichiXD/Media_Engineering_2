@@ -1,7 +1,6 @@
 /** This module defines the routes for videos using a mongoose model
  *
- * @author Johannes Konert
- * @licence CC BY-SA 4.0
+ * @author Samed Sulanc, Wadim Lewin, Clemens Buckert
  *
  * @module routes/videos
  * @type {Router}
@@ -65,7 +64,7 @@ videos.route('/')
         mongoDB_video.save(function(err) {
             if (err) {
                 console.log(err);
-                err = new Error('{"error": { "message": "Error while saving in database", "code": 500 } }');
+                err = new Error('{"error": { "message": "Error while creating in database", "code": 500 } }');
                 err.status = 500;
                 next(err);
             }
@@ -147,7 +146,7 @@ videos.route('/:id')
             mongoDB_video.__v = undefined;
 
             //nehme das layout von mongoDB_video und update alle Felder ausser _id und __v
-            Video.findByIdAndUpdate( req.params.id ,mongoDB_video, {new: true},function (err,videoContent) {
+            Video.findByIdAndUpdate( req.params.id ,mongoDB_video, {new: true,runValidators: true},function (err,videoContent) {
                 console.log(req.params.id)
                 if (err)
                 {
@@ -164,7 +163,7 @@ videos.route('/:id')
             //--------------END NEW CODE --------------------------
         }
         else {
-            var err = new Error('id of PUT resource and send JSON body are not equal ' + req.params.id + " " + req.body.id);
+            var err = new Error('id of PUT resource and send JSON body are not equal ' + req.params.id + " " + req.body._id);
             err.status = codes.wrongrequest;
             next(err);
         }
