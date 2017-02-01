@@ -22,8 +22,8 @@ requirejs.config({
 });
 
 // AMD conform require as provided by require.js
-require(['jquery','backbone', 'models/user', 'views/user', 'models/video', 'models/video.collection'],
-        function($, Backbone, User, UserView, Video, VideoCollection) {
+require(['jquery','backbone', 'models/user', 'views/user', 'models/video', 'models/video.collection', 'views/video', 'views/video-list'],
+        function($, Backbone, User, UserView, Video, VideoCollection, VideoView, VideoListView) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -32,12 +32,18 @@ require(['jquery','backbone', 'models/user', 'views/user', 'models/video', 'mode
         },
         main: function(){
             var videoCollection = new VideoCollection();
+            var videoListView = new VideoListView({collection: videoCollection});
+
             videoCollection.fetch({
-                success: function () {
-                    console.log(videoCollection.length + " Videos empfangen!");
+                success: function(collection, response) {
+                    if (response.length > 0) {
+                        console.log("Number of videos : " + response.length);
+                        console.log(videoCollection.at(0));
+                        videoListView.render();
+                    }
                 },
-                error: function () {
-                    console.log("error fetch");
+                error: function(model, response) {
+                    console.error("error ",model,response);
                 }
             });
         }
