@@ -22,8 +22,8 @@ requirejs.config({
 });
 
 // AMD conform require as provided by require.js
-require(['jquery','backbone', 'models/user', 'views/user'],
-        function($, Backbone, User, UserView) {
+require(['jquery','backbone', 'models/user', 'views/user', 'models/video', 'models/video.collection'],
+        function($, Backbone, User, UserView, Video, VideoCollection) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -31,20 +31,15 @@ require(['jquery','backbone', 'models/user', 'views/user'],
             '*whatever': 'main'
         },
         main: function(){
-            // var user = new User.Model({_id : '57554efd6c5edc1f5c9a2778'});  // hard coded instead of login..
-            //
-            // var userView = new UserView({model: user});
-            // var that = this;
-            // user.fetch( {
-            //    error: function(model, response) {
-            //        console.error("no user fetched");
-            //        userView.render();
-            //    },
-            //     success: function(model, response) {
-            //        userView.render();
-            //         that.user = user;
-            //     }
-            // });
+            var videoCollection = new VideoCollection();
+            videoCollection.fetch({
+                success: function () {
+                    console.log(videoCollection.length + " Videos empfangen!");
+                },
+                error: function () {
+                    console.log("error fetch");
+                }
+            });
         }
     });
 
