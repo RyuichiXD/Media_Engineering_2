@@ -1,15 +1,137 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="de">
+
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Johannes Konert">
-    <meta name="keywords" content="MME2, Übung3">
-    <meta name="description" content="Diese leere Indexdatei soll nur verdeutlichen, dass sie parallel zu Ihren REST-API
-     Routen weiterhin eine statische SinglePageApp (SPA) ausliefern können. Diese könnte dann bspw. mittels AJAX
-     (jQuery) Ihre REST-API anfragen und Inhalte Laden/Speichern">
-    <title>Dummy Startseite</title>
+    <meta charset="utf-8">
+    <title>Videos</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/app.js"></script>
 </head>
+
 <body>
-Eine leere Startseite
+
+<div id="wrapper">
+
+
+    <div id="container">
+
+        <aside id="sidebar">
+            <header>
+                <h1 >MmE2</h1>
+                <h2>WiSe2016</h2>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="#top">Top</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="content">
+
+            <div>
+                <h2 id="top">
+                    Multimedia Engeneering - Übung 1
+                </h2>
+                <h3>
+                    by group 1: Samed, Wadim, Clemens
+                </h3>
+            </div>
+
+            <!--start first row-->
+            <article>
+                <h2>Video webm</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+
+            <article>
+                <h2>Video ogg</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+
+            <article>
+                <h2>Video mp4</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+            <!--end first row-->
+            <!--start 2 row-->
+            <article>
+                <h2>Video webm</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+
+            <article>
+                <h2>Video ogg</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+
+            <article>
+                <h2>Video mp4</h2>
+                <video>
+                    <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="controlbtn">
+                    <button class="btnPlay">Play</button>
+                    <button class="btnPause">Pause</button>
+                    <button class="btnStop">Stop</button>
+                </div>
+            </article>
+            <!--end 2 row-->
+
+        </section>
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+    Copyright by Hochschule Beuth
+</footer>
+
+
 </body>
 </html>
