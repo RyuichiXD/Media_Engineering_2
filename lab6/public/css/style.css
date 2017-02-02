@@ -85,9 +85,9 @@ article h2 {
     flex: 1 0 20em; /**responsiveness**/
     margin: 0.5em; /**responsiveness**/
 }
-.content > *:first-child {
-    flex-basis: calc(100% - 1em); /**responsiveness**/
-}
+/*.content > *:first-child {*/
+    /*flex-basis: calc(100% - 1em); !**responsiveness**!*/
+/*}*/
 
 
 /**sidebar**/
